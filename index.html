@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curtain</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .curtain-container {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #111; /* Dark BG for Dramatic Look */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    
+    .rod {
+    width: 100%;
+    height: 15px;
+    background: linear-gradient(to bottom, #8B4513, #654321);
+    position: absolute;
+    top: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Rod ke dono ends pe design */
+.rod::before, .rod::after {
+    content: "";
+    width: 25px;  /* End cap size */
+    height: 25px;
+    background: radial-gradient(circle, #7a5230, #4a2c14); /* Wooden or metallic look */
+    border-radius: 50%; /* Circular design */
+    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.2),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.5); /* 3D effect */
+}
+
+/* Left side end */
+.rod::before {
+    margin-left: 10px;
+}
+
+/* Right side end */
+.rod::after {
+    margin-right: 10px;
+}
+
+
+    
+    
+    /* 🎭 2 Parda */
+    .curtain {
+        position: absolute;
+        top: 0;
+        width: 50vw;
+        height: 100vh;
+        /* background: linear-gradient(to bottom, #9b2226, #8d191d); */
+        background-image: url('curtain1.webp');
+        transition: transform 2s ease-in-out;
+    }
+    
+    @keyframes openCurtains {
+    0% { transform: translateX(0); }     /* Start Position */
+    80% { transform: translateX(-48vw); } /* Fast Move */
+    100% { transform: translateX(-45vw); } /* Slow Stop (Left Curtain) */
+}
+
+@keyframes openCurtainsRight {
+    0% { transform: translateX(0); } 
+    80% { transform: translateX(48vw); } 
+    100% { transform: translateX(45vw); } /* Slow Stop (Right Curtain) */
+}
+
+/* Common Styles */
+.curtain {
+    position: absolute;
+    width: 50vw;
+    height: 100vh;
+    top: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Left Curtain */
+.left-curtain {
+    left: 0;
+    background: url('curtain1.webp') center;
+    animation: openCurtains 3s ease-out forwards;
+}
+
+/* Right Curtain */
+.right-curtain {
+    right: 0;
+    background: url('curtain1.webp') center;
+    animation: openCurtainsRight 3s ease-out forwards;
+}
+
+    
+    /* ✨ Hero Section (Hidden by Default) */
+    .hero-section {
+        position: absolute;
+        text-align: center;
+        color: white;
+        font-size: 24px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(200px);
+        transform: scale(-2);
+        transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    }
+    
+    /* 🎭 Animation Effect */
+    .reveal .left-curtain {
+        transform: translateX(-100%);
+    }
+    .reveal .right-curtain {
+        transform: translateX(100%);
+    }
+    .reveal .hero-section {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    @media (max-width: 768px) {
+    /* 🎭 Parda width zyada karein taaki achha dikhe */
+    .curtain {
+        width: 60vw;
+    }
+
+    /* 🎭 Hero Section ko chhota aur readable banayein */
+    .hero-section {
+        font-size: 18px;
+        padding: 10px;
+        position: absolute;
+        top: 15%;
+        
+    }
+
+    /* 🎭 Animation ko thoda fast kar dein */
+    .reveal .left-curtain {
+        transform: translateX(-110%);
+    }
+    .reveal .right-curtain {
+        transform: translateX(110%);
+    }
+}
+/* Button Styling */
+.enter-button {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, blue, #cf0101);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0;  /* Pehle hidden rahega */
+    transition: opacity 1s ease-in-out;
+}
+
+/* Curtain Animation ke baad Show hoga */
+.show-button {
+    opacity: 1;
+}
+@media (max-width: 768px) {
+    .enter-button {
+        font-size: 16px;  /* Chhota size mobile ke liye */
+        padding: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div class="curtain-container">
+        <div class="rod"></div>  <!-- Upar Lathi -->
+        <div class="curtain left-curtain"></div>   <!-- Left Parda -->
+        <div class="curtain right-curtain"></div>  <!-- Right Parda -->
+        <div class="hero-section">
+            <h1>Jakir's Digital World</h1>
+            <p>Jakir Hussain – The Digital Architect</p>
+        </div>
+    </div>
+    <!-- Enter Website Button -->
+<button class="enter-button" id="enterButton" onclick="enterWebsite()">Step Into Jakir's Universe</button>
+
+    <script>
+        // 🛑 JavaScript Se Curtain Remove Karna
+// 🎭 JavaScript Se Parda Hatana
+setTimeout(() => {
+    document.querySelector('.curtain-container').classList.add('reveal');
+}, 1500); // 1.5s Delay ke baad Animation Start
+
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+        document.body.classList.add("reveal"); 
+    }, 2000); // 2 sec baad hero section aayega (curtain animation time ke baad)
+});
+// Wait for Curtain Animation, then Show Button
+setTimeout(() => {
+    document.getElementById("enterButton").classList.add("show-button");
+}, 3000);  // Curtain Animation Ke Baad
+
+// Redirect to Main Website
+function enterWebsite() {
+    window.location.href = "main.html";  // Apna Main Page Link Dal Do
+}
+
+    </script>
+</body>
+</html>
