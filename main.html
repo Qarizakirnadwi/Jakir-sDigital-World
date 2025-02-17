@@ -68,7 +68,7 @@
                     ERP and CRM solutions, and digital business strategies.
                 </p>
                 <p>
-                    Additionally, I am the founder of <a id="link" href="">QuantaX,</a> a company that integrates
+                    Additionally, I am the founder of <a id="link" href="#">QuantaX,</a> a company that integrates
                     Teaching, Trading, Broadcasting, and Technology. My ambition is to establish a global presence
                     through import-export ventures, digital solutions, and educational initiatives, ensuring that my
                     work impacts diverse industries worldwide.
@@ -271,6 +271,11 @@
                 <p>Bachelor's in English from Guwahati University.</p>
                 <a href="MY Graduation Marksheet.pdf" target="_blank">View Certification & Marksheet </a>
             </div>
+             <div class="certification-item">
+                <h3>Digital-Productivity </h3>
+                <p>CSC Academy ( NIIT FOUNDATION ) </p>
+                <a href="Certificate_of Digital Productivity.pdf" target="_blank">View Certification </a>
+            </div>
         </div>
     </section>
 
@@ -389,6 +394,13 @@
         document.querySelector(".door-container").classList.add("open");
     }, 1000); // 1 second delay before doors open
  });
+         setTimeout(() => {
+   let box =  document.querySelector(".door-container")
+   box.remove();
+  let open = document.querySelector(".open")
+  open.remove();
+  console.log("remove");
+}, 3000);
 </script>
 </body>
 </html>
